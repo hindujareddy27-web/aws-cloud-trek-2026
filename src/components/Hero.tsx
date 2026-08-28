@@ -55,20 +55,22 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-6xl">
         {/* black framed composition */}
-        <div className="relative border-[4px] border-ink bg-cream p-4 shadow-hard-lg md:p-8">
+        <div className="relative border-[4px] border-ink bg-cream p-3 sm:p-4 shadow-hard-lg md:p-6">
           {/* top metadata bar — SCOPE logo + event info */}
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b-[3px] border-ink pb-3">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between gap-3 border-[3px] border-ink bg-black px-3.5 py-2 sm:px-4 md:px-6 md:py-2.5">
+            <div className="flex items-center gap-2.5 sm:gap-3.5">
               <img
                 src={BRANDING.scopeLogo}
                 alt="SCOPE Club MLRIT logo"
-                className="h-8 w-auto object-contain md:h-10"
+                className="h-6 w-auto object-contain sm:h-7 md:h-8"
               />
-              <span className="border-[2px] border-ink bg-ink px-2 py-0.5 font-sans text-[9px] font-bold uppercase tracking-[0.15em] text-cream md:text-xs">
-                {BRANDING.scope}
-              </span>
+              <img
+                src={BRANDING.awsSbgLogo}
+                alt="AWS Student Builder Group MLRIT logo"
+                className="h-5 w-auto object-contain sm:h-6 md:h-7"
+              />
             </div>
-            <span className="font-sans text-[9px] font-bold uppercase tracking-[0.15em] text-ink md:text-sm">
+            <span className="font-sans text-[10px] font-bold uppercase tracking-[0.12em] text-white sm:text-xs md:text-sm md:tracking-[0.15em]">
               {EVENT.date} · {EVENT.level}
             </span>
           </div>

@@ -47,24 +47,60 @@ export type GalleryItem = {
   rotate: string;
 };
 
-// Gallery — actual uploaded photographs from the previous event.
+// Gallery — 1:1 strict mapping to unique physical photograph files in public/gallery/
 export const GALLERY: GalleryItem[] = [
   {
-    id: 'g1',
+    id: 'gallery01',
     number: '01',
-    label: 'LEARNING IN ACTION',
-    caption: 'AWS Cloud Trek — Learning in Action',
-    src: '/gallery/last-trek-01-speaker.jpg',
-    alt: 'A speaker presenting at the previous AWS Cloud Trek event',
+    label: 'FULL HOUSE',
+    caption: 'AWS Cloud Trek presentation & hall view',
+    src: '/gallery/last-trek-07-workshop.jpg',
+    alt: 'Projector screen displaying AWS Cloud Trek presentation in packed classroom',
     rotate: '-rotate-2',
   },
   {
-    id: 'g2',
+    id: 'gallery02',
     number: '02',
+    label: 'THE SPEAKERS',
+    caption: 'Keynote introduction & cloud architecture breakdown',
+    src: '/gallery/last-trek-01-speaker.jpg',
+    alt: 'Speaker presenting AWS Cloud Trek session with microphone',
+    rotate: 'rotate-2',
+  },
+  {
+    id: 'gallery03',
+    number: '03',
+    label: 'PRIZE & HONORS',
+    caption: 'Felicitation and project recognition ceremony',
+    src: '/gallery/last-trek-03-award.jpg',
+    alt: 'Award presentation recognizing student builder at MLRIT',
+    rotate: '-rotate-1',
+  },
+  {
+    id: 'gallery04',
+    number: '04',
     label: 'THE TEAM',
-    caption: 'The Team Behind the Trek',
+    caption: 'Mentors, organizers, and all student builders',
     src: '/gallery/last-trek-02-team.jpg',
-    alt: 'The organizing team from the previous AWS Cloud Trek event',
+    alt: 'Full participant and team group photo at MLRIT',
+    rotate: 'rotate-2',
+  },
+  {
+    id: 'gallery05',
+    number: '05',
+    label: 'HACK & COLLAB',
+    caption: 'Student builders collaborating and building cloud setups',
+    src: '/gallery/last-trek-06-mentor.jpg',
+    alt: 'Four students collaborating with smiles over a laptop',
+    rotate: '-rotate-2',
+  },
+  {
+    id: 'gallery06',
+    number: '06',
+    label: 'CLOUD LAB',
+    caption: 'Hands-on console setups and live deployment',
+    src: '/gallery/last-trek-08-workspace.jpeg',
+    alt: 'Students actively working on laptops during cloud workshop',
     rotate: 'rotate-2',
   },
 ];
