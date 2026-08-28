@@ -62,7 +62,7 @@ export default function Hero() {
               <img
                 src={BRANDING.scopeLogo}
                 alt="SCOPE Club MLRIT logo"
-                className="h-8 w-auto border-[2px] border-ink bg-cream object-contain p-0.5 md:h-10"
+                className="h-8 w-auto object-contain md:h-10"
               />
               <span className="border-[2px] border-ink bg-ink px-2 py-0.5 font-sans text-[9px] font-bold uppercase tracking-[0.15em] text-cream md:text-xs">
                 {BRANDING.scope}

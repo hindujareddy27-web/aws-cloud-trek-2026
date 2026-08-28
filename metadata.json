@@ -1,0 +1,6 @@
+{
+  "name": "AWS Cloud Trek",
+  "description": "AWS Cloud Trek — a hands-on student event. Build with Kiro, deploy on AWS. Beginner friendly.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
