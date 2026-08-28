@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #8b5cf6;
+    color: #0b0a0f;
+  }
+}
+
+@layer utilities {
+  .text-stroke-cream {
+    -webkit-text-stroke: 2px #f5f1e8;
+    text-stroke: 2px #f5f1e8;
+    color: transparent;
+  }
+}
+
+/* Desktop-only: hide native cursor when custom cursor is active.
+   The CustomCursor component is only rendered on fine-pointer devices. */
+@media (pointer: fine) {
+  @media (min-width: 768px) {
+    html.has-custom-cursor,
+    html.has-custom-cursor * {
+      cursor: none !important;
+    }
+  }
+}
+
+/* Respect prefers-reduced-motion: simplify/disable non-essential animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
