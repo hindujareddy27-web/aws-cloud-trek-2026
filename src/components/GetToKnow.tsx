@@ -1,5 +1,5 @@
 import Ghost from './Ghost';
-import { ArrowSticker, StarSticker, DotsSticker, BurstSticker, CircleSticker } from './Stickers';
+import { StarSticker, DotsSticker, BurstSticker, CircleSticker } from './Stickers';
 import { EVENT } from '@/config';
 import { useInView } from '@/hooks/useInView';
 
@@ -26,9 +26,8 @@ const DETAILS = [
 ];
 
 const INFO_BLOCKS = [
-  { label: 'SCHEDULE', value: 'Coming Soon' },
-  { label: 'PROBLEM STATEMENTS', value: 'Coming Soon' },
-  { label: 'SPEAKERS', value: 'Coming Soon' },
+  { label: 'SPEAKER 1', value: 'Coming Soon' },
+  { label: 'SPEAKER 2', value: 'Coming Soon' },
 ];
 
 const WORKSHOP_TOPICS = [
@@ -52,7 +51,6 @@ export default function GetToKnow() {
   return (
     <section id="trek" className="relative bg-ink px-3 py-14 md:px-6 md:py-20">
       <DotsSticker className="absolute left-4 top-10 h-12 w-12 opacity-30 md:left-12 md:h-16 md:w-16" />
-      <StarSticker className="absolute right-6 top-24 h-8 w-8 animate-wobble opacity-90 md:h-14 md:w-14" />
 
       <div className="relative mx-auto max-w-6xl">
         {/* heading */}
@@ -65,7 +63,7 @@ export default function GetToKnow() {
           </h2>
           <div className="my-2 flex items-center gap-3">
             <span className="h-1 w-10 bg-e-purple md:w-16" />
-            <ArrowSticker className="h-6 w-6 text-cream md:h-8 md:w-8" />
+            <StarSticker className="h-6 w-6 animate-wobble text-cream md:h-8 md:w-8" />
             <span className="h-1 w-10 bg-e-purple md:w-16" />
           </div>
           <h2 className="font-display text-[clamp(2.25rem,8vw,6rem)] uppercase leading-[0.85] tracking-tighter text-e-purple">
@@ -134,8 +132,8 @@ export default function GetToKnow() {
           </h2>
         </div>
 
-        {/* Info blocks — Schedule / Problem Statements / Speakers */}
-        <div className="mt-8 grid grid-cols-1 gap-4 md:mt-10 md:grid-cols-3 md:gap-4">
+        {/* Info blocks — Speakers */}
+        <div className="mx-auto mt-8 grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2 md:mt-10 md:gap-4">
           {INFO_BLOCKS.map((b, i) => (
             <div
               key={b.label}
@@ -181,14 +179,14 @@ export default function GetToKnow() {
           <p className="text-center font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-cream/60 md:text-xs">
             The Journey
           </p>
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 md:gap-3">
+          <div className="mt-4 flex flex-col items-center gap-2 md:flex-row md:flex-wrap md:justify-center md:gap-3">
             {JOURNEY_STEPS.map((step, i) => (
-              <div key={step} className="flex items-center gap-2 md:gap-3">
+              <div key={step} className="flex flex-col items-center gap-2 md:flex-row md:gap-3">
                 <span className="border-[2px] border-cream bg-e-purple px-2 py-1 font-sans text-[9px] font-bold uppercase tracking-wide text-ink md:px-3 md:text-xs">
                   {step}
                 </span>
                 {i < JOURNEY_STEPS.length - 1 && (
-                  <span className="text-e-purple md:text-lg">→</span>
+                  <span className="rotate-90 text-e-purple md:rotate-0 md:text-lg">→</span>
                 )}
               </div>
             ))}

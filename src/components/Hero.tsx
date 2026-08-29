@@ -57,8 +57,8 @@ export default function Hero() {
         {/* black framed composition */}
         <div className="relative border-[4px] border-ink bg-cream p-3 sm:p-4 shadow-hard-lg md:p-6">
           {/* top metadata bar — SCOPE logo + event info */}
-          <div className="flex items-center justify-between gap-3 border-[3px] border-ink bg-black px-3.5 py-2 sm:px-4 md:px-6 md:py-2.5">
-            <div className="flex items-center gap-2.5 sm:gap-3.5">
+          <div className="flex flex-col items-start gap-2 border-[3px] border-ink bg-black px-3.5 py-2.5 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:py-2 md:px-6 md:py-2.5">
+            <div className="flex w-full items-center justify-between gap-2.5 sm:w-auto sm:justify-start sm:gap-3.5">
               <img
                 src={BRANDING.scopeLogo}
                 alt="SCOPE Club MLRIT logo"
@@ -67,10 +67,10 @@ export default function Hero() {
               <img
                 src={BRANDING.awsSbgLogo}
                 alt="AWS Student Builder Group MLRIT logo"
-                className="h-5 w-auto object-contain sm:h-6 md:h-7"
+                className="h-6 w-auto object-contain sm:h-6 md:h-7"
               />
             </div>
-            <span className="font-sans text-[10px] font-bold uppercase tracking-[0.12em] text-white sm:text-xs md:text-sm md:tracking-[0.15em]">
+            <span className="w-full text-center font-sans text-[10px] font-bold uppercase tracking-[0.12em] text-white sm:w-auto sm:text-left sm:text-xs md:text-sm md:tracking-[0.15em]">
               {EVENT.date} · {EVENT.level}
             </span>
           </div>
@@ -127,7 +127,7 @@ export default function Hero() {
                   <TriangleSticker className="absolute bottom-4 left-4 h-10 w-10 animate-wobble md:h-16 md:w-16" />
                   <CloudSticker className="absolute right-0 bottom-8 h-10 w-16 animate-floatY opacity-90 md:h-14 md:w-20" />
                   <BurstSticker className="absolute left-6 top-1/2 h-6 w-6 animate-spinSlow opacity-80 md:h-8 md:w-8" />
-                  <ArrowSticker className="absolute right-4 top-1/2 h-6 w-6 -rotate-45 md:h-8 md:w-8" />
+                  <ArrowSticker className="absolute right-4 top-1/2 hidden h-6 w-6 -rotate-45 md:block md:h-8 md:w-8" />
                 </div>
 
                 {/* ghost — entrance animation plays first, then idle float */}

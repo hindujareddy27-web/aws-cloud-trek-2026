@@ -84,7 +84,7 @@ export default function FinalCta() {
               <p className="font-sans text-xs font-medium text-cream/60 md:text-sm">
                 {EVENT.tagline} · {EVENT.date}
               </p>
-              <div className="mt-3 flex flex-col gap-2">
+              <div className="mt-3 flex flex-col items-center gap-2 md:items-start">
                 <a href={`tel:${CONTACT.phone1.replace(/\s/g, '')}`} className="inline-flex items-center gap-2 font-sans text-xs font-bold text-cream/80 hover:text-cream md:text-sm">
                   <Phone size={14} strokeWidth={2.5} />
                   {CONTACT.phone1}
