@@ -23,9 +23,203 @@
       href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- n8n Chat Widget CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+    <style>
+      /* 1. Global n8n Theme Variables (Overriding all pink defaults) */
+      :root {
+        --chat--color-primary: #8B5CF6 !important;
+        --chat--color-primary-shade-50: #7C3AED !important;
+        --chat--color-primary-shade-100: #6D28D9 !important;
+        --chat--toggle--background: #8B5CF6 !important;
+        --chat--toggle--hover--background: #7C3AED !important;
+        --chat--toggle--active--background: #6D28D9 !important;
+        --chat--color-secondary: #0B0A0F !important;
+        --chat--color-background: #F5F1E8 !important;
+        --chat--color-font: #0B0A0F !important;
+      }
+
+      /* 2. Cursor fixes */
+      .chat-window, .chat-window *, .chat-toggle, .chat-toggle * {
+        cursor: auto !important;
+      }
+      .chat-window button, .chat-window [role="button"], .chat-toggle {
+        cursor: pointer !important;
+      }
+      .chat-window input, .chat-window textarea {
+        cursor: text !important;
+      }
+
+      /* 3. Neo-Brutalism Chat Window & Mobile Responsive Sizing */
+      .chat-window {
+        border: 3px solid #0B0A0F !important;
+        box-shadow: 6px 6px 0px 0px #0B0A0F !important;
+        border-radius: 16px !important;
+        background-color: #F5F1E8 !important;
+        overflow: hidden !important;
+      }
+
+      @media (max-width: 640px) {
+        .chat-window {
+          width: calc(100vw - 2rem) !important;
+          max-width: 360px !important;
+          height: 65vh !important;
+          max-height: 480px !important;
+          bottom: 5.5rem !important;
+          right: 1rem !important;
+        }
+      }
+
+      @media (min-width: 641px) {
+        .chat-window {
+          width: 380px !important;
+          height: 520px !important;
+          bottom: 5.5rem !important;
+          right: 1.5rem !important;
+        }
+      }
+
+      /* 4. Kill the pink rim on all n8n toggle wrappers & native buttons */
+      .chat-toggle,
+      button[class*="toggle"],
+      button[aria-label*="chat" i],
+      div[class*="toggle"],
+      div[class*="chat-toggle"] {
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+      }
+
+      /* Keep the real native button invisible so our visual button handles the look */
+      .chat-toggle,
+      button[class*="toggle"],
+      button[aria-label*="chat" i] {
+        opacity: 0.001 !important;
+        z-index: 2147483647 !important;
+      }
+
+      /* 5. Pure Neo-Brutalist Purple Ghost Launcher */
+      #ghost-visual-badge {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 9999px;
+        background-color: #8B5CF6;
+        border: 3px solid #0B0A0F;
+        box-shadow: 4px 4px 0px 0px #0B0A0F;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none; /* Let user clicks pass through to n8n's transparent button */
+        z-index: 2147483646;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      #ghost-visual-badge img {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+        display: block;
+      }
+
+      #ghost-visual-badge .badge-close {
+        display: none;
+        font-size: 24px;
+        font-weight: 900;
+        color: #FFFFFF;
+        line-height: 1;
+      }
+
+      /* Only show ✕ when chat is actively open */
+      #ghost-visual-badge.is-open img {
+        display: none;
+      }
+      #ghost-visual-badge.is-open .badge-close {
+        display: block;
+      }
+
+      @media (max-width: 640px) {
+        #ghost-visual-badge {
+          bottom: 16px;
+          right: 16px;
+          width: 52px;
+          height: 52px;
+        }
+        #ghost-visual-badge img {
+          width: 28px;
+          height: 28px;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Custom Purple Ghost Badge -->
+    <div id="ghost-visual-badge" aria-hidden="true">
+      <img src="/ghost.svg" alt="Chat Assistant" />
+      <span class="badge-close">✕</span>
+    </div>
+
+    <!-- n8n Chat Initialization Script -->
+    <script type="module">
+      import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+      createChat({
+        webhookUrl: 'https://akshay145.app.n8n.cloud/webhook/a73e7828-60dd-412e-9f53-7282c3e33b63/chat',
+        showWelcomeScreen: false,
+        theme: {
+          button: {
+            backgroundColor: '#8B5CF6',
+            color: '#FFFFFF',
+          },
+        },
+        initialMessages: [
+          'Welcome to AWS Cloud Trek 2026! 🚀',
+          'Ask me anything about the workshop schedule, venue, prerequisites, or registration.'
+        ],
+        i18n: {
+          en: {
+            title: 'AWS Cloud Trek Assistant',
+            subtitle: 'Scope Club & AWS Student Builder Group',
+            inputPlaceholder: 'Ask a question...',
+          },
+        },
+      });
+
+      const badge = document.getElementById('ghost-visual-badge');
+
+      // Accurate check: Only show '✕' if the chat window is genuinely open and visible
+      function syncBadgeState() {
+        const chatWin = document.querySelector('.chat-window, [class*="chat-window"]');
+        if (!chatWin) {
+          badge.classList.remove('is-open');
+          return;
+        }
+
+        const rect = chatWin.getBoundingClientRect();
+        const isVisible = rect.height > 100 && 
+                          chatWin.style.display !== 'none' && 
+                          !chatWin.classList.contains('hidden') && 
+                          getComputedStyle(chatWin).visibility !== 'hidden' &&
+                          getComputedStyle(chatWin).opacity !== '0';
+
+        if (isVisible) {
+          badge.classList.add('is-open');
+        } else {
+          badge.classList.remove('is-open');
+        }
+      }
+
+      setInterval(syncBadgeState, 200);
+    </script>
   </body>
 </html>
+```[cite: 1]
+
+Save **`index.html`** and hard-refresh with **Ctrl + F5** (or **Cmd + Shift + R**)[cite: 1]. The pink rim will vanish, your purple button with the ghost logo will display cleanly by default, and clicking it will switch to the `✕` while opening the chat[cite: 10].

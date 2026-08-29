@@ -27,18 +27,17 @@
   }
 }
 
-/* Desktop-only: hide native cursor when custom cursor is active.
-   The CustomCursor component is only rendered on fine-pointer devices. */
-@media (pointer: fine) {
-  @media (min-width: 768px) {
-    html.has-custom-cursor,
-    html.has-custom-cursor * {
-      cursor: none !important;
-    }
+/* =========================================================
+   CUSTOM CURSOR LOGIC (Desktop Fine Pointer Only)
+   Excludes all n8n chat elements so system cursor stays visible
+   ========================================================= */
+@media (pointer: fine) and (min-width: 768px) {
+  html.has-custom-cursor *:not([class*="chat"]):not([class*="chat"] *):not(#n8n-chat *):not(.chat-window *):not(.chat-toggle *) {
+    cursor: none !important;
   }
 }
 
-/* Respect prefers-reduced-motion: simplify/disable non-essential animations */
+/* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -48,4 +47,138 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* =========================================================
+   N8N CHATBOT: OFFICIAL CSS VARIABLES
+   ========================================================= */
+:root {
+  --chat--color-primary: #8B5CF6;
+  --chat--color-secondary: #0B0A0F;
+  --chat--color-background: #F5F1E8;
+  --chat--color-font: #0B0A0F;
+  
+  --chat--message--bot--background: #FFFFFF;
+  --chat--message--bot--color: #0B0A0F;
+  --chat--message--user--background: #8B5CF6;
+  --chat--message--user--color: #FFFFFF;
+  
+  --chat--border-radius: 16px;
+  --chat--window--border: 3px solid #0B0A0F;
+  --chat--window--box-shadow: 6px 6px 0px 0px #0B0A0F;
+}
+
+/* =========================================================
+   N8N CHAT WINDOW: ONLY STYLE WHEN ACTIVELY OPEN
+   ========================================================= */
+.chat-window:not([style*="display: none"]):not([style*="visibility: hidden"]):not(.hidden) {
+  border: 3px solid #0B0A0F !important;
+  box-shadow: 6px 6px 0px 0px #0B0A0F !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  background-color: #F5F1E8 !important;
+}
+
+/* Mobile Sizing: Keeps header & footer visible */
+@media (max-width: 640px) {
+  .chat-window:not([style*="display: none"]):not([style*="visibility: hidden"]):not(.hidden) {
+    width: calc(100vw - 2rem) !important;
+    max-width: 360px !important;
+    height: 65vh !important;
+    max-height: 480px !important;
+    bottom: 5.5rem !important;
+    right: 1rem !important;
+  }
+}
+
+/* Desktop Sizing */
+@media (min-width: 641px) {
+  .chat-window:not([style*="display: none"]):not([style*="visibility: hidden"]):not(.hidden) {
+    width: 380px !important;
+    height: 520px !important;
+    bottom: 5.5rem !important;
+    right: 1.5rem !important;
+  }
+}
+
+/* Message Bubble Borders */
+.chat-message.chat-message--bot,
+.chat-message.chat-message--user {
+  border: 2px solid #0B0A0F !important;
+  box-shadow: 3px 3px 0px 0px #0B0A0F !important;
+  border-radius: 12px !important;
+}
+
+/* =========================================================
+   CURSOR RESTORATION FOR CHAT
+   ========================================================= */
+.chat-window,
+.chat-window *,
+.chat-toggle,
+.chat-toggle * {
+  cursor: auto !important;
+}
+
+.chat-window button,
+.chat-toggle,
+.chat-toggle * {
+  cursor: pointer !important;
+}
+
+.chat-window input,
+.chat-window textarea {
+  cursor: text !important;
+}
+
+/* =========================================================
+   GHOST MASCOT LAUNCHER BUTTON
+   ========================================================= */
+.chat-toggle {
+  background-color: #F5F1E8 !important;
+  border: 3px solid #0B0A0F !important;
+  box-shadow: 4px 4px 0px 0px #0B0A0F !important;
+  border-radius: 9999px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.chat-toggle:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 6px 6px 0px 0px #0B0A0F !important;
+}
+
+.chat-toggle:active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 1px 1px 0px 0px #0B0A0F !important;
+}
+
+/* Hide default SVG */
+.chat-toggle svg {
+  display: none !important;
+}
+
+/* Insert Ghost SVG */
+.chat-toggle::before {
+  content: "" !important;
+  display: block !important;
+  width: 34px !important;
+  height: 34px !important;
+  background-image: url('/ghost.svg') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+/* Toggle back to close mark when active */
+.chat-toggle.chat-toggle--open::before {
+  content: "✕" !important;
+  background-image: none !important;
+  font-size: 20px !important;
+  font-weight: 900 !important;
+  color: #0B0A0F !important;
+  line-height: 34px !important;
+  text-align: center !important;
 }
