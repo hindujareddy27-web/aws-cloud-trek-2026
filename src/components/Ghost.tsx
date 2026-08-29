@@ -6,9 +6,28 @@ type GhostProps = {
   eyeTargetRef?: RefObject<HTMLElement | null>;
   /** When true, the ghost performs a wink on mount (after entrance). */
   wink?: boolean;
+  /** Body fill color. Defaults to cream. */
+  bodyFill?: string;
+  /** Outline / mouth stroke color. Defaults to ink. */
+  strokeColor?: string;
+  /** Cheek blush color. Defaults to lavender. */
+  cheekFill?: string;
+  /** Eye (pupil) fill color. Defaults to ink. */
+  eyeFill?: string;
+  /** Eye highlight dot color. Defaults to cream. */
+  highlightFill?: string;
 };
 
-export default function Ghost({ className = '', eyeTargetRef, wink = false }: GhostProps) {
+export default function Ghost({
+  className = '',
+  eyeTargetRef,
+  wink = false,
+  bodyFill = '#F5F1E8',
+  strokeColor = '#0B0A0F',
+  cheekFill = '#C4B5FD',
+  eyeFill = '#0B0A0F',
+  highlightFill = '#F5F1E8',
+}: GhostProps) {
   const leftPupilRef = useRef<SVGGElement>(null);
   const rightPupilRef = useRef<SVGGElement>(null);
   const leftHighlightRef = useRef<SVGCircleElement>(null);
@@ -76,29 +95,28 @@ export default function Ghost({ className = '', eyeTargetRef, wink = false }: Gh
            L 172 196
            L 172 96
            C 172 46, 145 10, 100 10 Z"
-        fill="#F5F1E8"
-        stroke="#0B0A0F"
+        style={{ fill: bodyFill, stroke: strokeColor, transition: 'fill 200ms ease-out, stroke 200ms ease-out' }}
         strokeWidth="6"
         strokeLinejoin="round"
       />
       {/* cheeks */}
-      <circle cx="66" cy="108" r="9" fill="#C4B5FD" />
-      <circle cx="134" cy="108" r="9" fill="#C4B5FD" />
+      <circle cx="66" cy="108" r="9" style={{ fill: cheekFill, transition: 'fill 200ms ease-out' }} />
+      <circle cx="134" cy="108" r="9" style={{ fill: cheekFill, transition: 'fill 200ms ease-out' }} />
       {/* left eye group */}
       <g ref={leftPupilRef}>
-        <ellipse cx="78" cy="92" rx="9" ry="11" fill="#0B0A0F" />
-        <circle ref={leftHighlightRef} cx="81" cy="88" r="3" fill="#F5F1E8" />
+        <ellipse cx="78" cy="92" rx="9" ry="11" style={{ fill: eyeFill, transition: 'fill 200ms ease-out' }} />
+        <circle ref={leftHighlightRef} cx="81" cy="88" r="3" style={{ fill: highlightFill, transition: 'fill 200ms ease-out' }} />
       </g>
       {/* right eye group — winks on entrance when enabled */}
       <g ref={rightPupilRef} className={wink ? 'origin-center animate-wink' : ''} style={{ transformBox: 'fill-box', transformOrigin: 'center' }}>
-        <ellipse cx="122" cy="92" rx="9" ry="11" fill="#0B0A0F" />
-        <circle ref={rightHighlightRef} cx="125" cy="88" r="3" fill="#F5F1E8" />
+        <ellipse cx="122" cy="92" rx="9" ry="11" style={{ fill: eyeFill, transition: 'fill 200ms ease-out' }} />
+        <circle ref={rightHighlightRef} cx="125" cy="88" r="3" style={{ fill: highlightFill, transition: 'fill 200ms ease-out' }} />
       </g>
       {/* mouth */}
       <path
         d="M88 118 Q 100 132 112 118"
         fill="none"
-        stroke="#0B0A0F"
+        style={{ stroke: strokeColor, transition: 'stroke 200ms ease-out' }}
         strokeWidth="5"
         strokeLinecap="round"
       />

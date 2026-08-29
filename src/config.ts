@@ -10,7 +10,7 @@ export const EVENT = {
   venue: 'TP Block, MLRIT',
   audience: '2nd & 3rd-year students',
   level: 'Beginner-friendly',
-  focus: 'AI × Kiro × AWS',
+  focus: 'AWS × Kiro',
   laptop: 'REQUIRED',
   registrationUrl: 'https://luma.com/8l7c68nm',
 };
@@ -52,10 +52,10 @@ export const GALLERY: GalleryItem[] = [
   {
     id: 'gallery01',
     number: '01',
-    label: 'FULL HOUSE',
-    caption: 'AWS Cloud Trek presentation & hall view',
-    src: '/gallery/last-trek-07-workshop.jpg',
-    alt: 'Projector screen displaying AWS Cloud Trek presentation in packed classroom',
+    label: 'HACK & COLLAB',
+    caption: 'Student builders collaborating and building cloud setups',
+    src: '/gallery/last-trek-06-mentor.jpg',
+    alt: 'Four students collaborating with smiles over a laptop',
     rotate: '-rotate-2',
   },
   {
@@ -88,10 +88,10 @@ export const GALLERY: GalleryItem[] = [
   {
     id: 'gallery05',
     number: '05',
-    label: 'HACK & COLLAB',
-    caption: 'Student builders collaborating and building cloud setups',
-    src: '/gallery/last-trek-06-mentor.jpg',
-    alt: 'Four students collaborating with smiles over a laptop',
+    label: 'FULL HOUSE',
+    caption: 'AWS Cloud Trek presentation & hall view',
+    src: '/gallery/last-trek-07-workshop.jpg',
+    alt: 'Projector screen displaying AWS Cloud Trek presentation in packed classroom',
     rotate: '-rotate-2',
   },
   {
