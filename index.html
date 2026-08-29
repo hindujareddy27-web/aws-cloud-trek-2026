@@ -28,17 +28,47 @@
     <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
 
     <style>
-      /* 1. Global n8n Theme Variables (Overriding all pink defaults) */
+      /* 1. Kiro Theme Variables (dark IDE-panel palette, brand purple accent) */
       :root {
-        --chat--color-primary: #8B5CF6 !important;
-        --chat--color-primary-shade-50: #7C3AED !important;
-        --chat--color-primary-shade-100: #6D28D9 !important;
-        --chat--toggle--background: #8B5CF6 !important;
-        --chat--toggle--hover--background: #7C3AED !important;
-        --chat--toggle--active--background: #6D28D9 !important;
-        --chat--color-secondary: #0B0A0F !important;
-        --chat--color-background: #F5F1E8 !important;
-        --chat--color-font: #0B0A0F !important;
+        --kiro-purple: #9046FF;
+        --kiro-purple-hover: #7C36DB;
+        --kiro-purple-active: #6425B8;
+        --kiro-bg: #0D0B10;
+        --kiro-surface: #19161D;
+        --kiro-surface-elevated: #211D25;
+        --kiro-border: #2A262E;
+        --kiro-text: #FAFAFA;
+        --kiro-text-muted: #A1A1AA;
+
+        --chat--color-primary: var(--kiro-purple) !important;
+        --chat--color-primary-shade-50: var(--kiro-purple-hover) !important;
+        --chat--color-primary-shade-100: var(--kiro-purple-active) !important;
+        --chat--toggle--background: var(--kiro-purple) !important;
+        --chat--toggle--hover--background: var(--kiro-purple-hover) !important;
+        --chat--toggle--active--background: var(--kiro-purple-active) !important;
+        --chat--toggle--color: #FFFFFF !important;
+        --chat--color-font: var(--kiro-text) !important;
+
+        --chat--header--background: var(--kiro-bg) !important;
+        --chat--header--color: var(--kiro-text) !important;
+        --chat--header--border-bottom: 2px solid var(--kiro-purple) !important;
+
+        --chat--body--background: var(--kiro-bg) !important;
+        --chat--message--bot--background: var(--kiro-surface) !important;
+        --chat--message--bot--color: var(--kiro-text) !important;
+        --chat--message--user--background: var(--kiro-purple) !important;
+        --chat--message--user--color: #FFFFFF !important;
+
+        --chat--input--background: var(--kiro-surface-elevated) !important;
+        --chat--input--text-color: var(--kiro-text) !important;
+        --chat--input--container--background: var(--kiro-surface-elevated) !important;
+        --chat--input--container--border: 1px solid var(--kiro-border) !important;
+        --chat--input--container--padding: 6px 6px 6px 16px !important;
+        --chat--footer--background: var(--kiro-bg) !important;
+        --chat--footer--border-top: 1px solid var(--kiro-border) !important;
+
+        --chat--window--border: none !important;
+        --chat--border-radius: 12px !important;
       }
 
       /* 2. Cursor fixes */
@@ -52,32 +82,143 @@
         cursor: text !important;
       }
 
-      /* 3. Neo-Brutalism Chat Window & Mobile Responsive Sizing */
+      /* 3. Kiro-style docked sidebar (desktop) / bottom sheet (mobile) */
       .chat-window {
-        border: 3px solid #0B0A0F !important;
-        box-shadow: 6px 6px 0px 0px #0B0A0F !important;
-        border-radius: 16px !important;
-        background-color: #F5F1E8 !important;
+        background-color: var(--kiro-bg) !important;
         overflow: hidden !important;
+      }
+
+      /* Input pill: subtle border that lights up purple on focus, plus a
+         proper filled circular send button instead of a bare arrow. */
+      .chat-inputs {
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      }
+      .chat-inputs:focus-within {
+        border-color: var(--kiro-purple) !important;
+        box-shadow: 0 0 0 3px rgba(144, 70, 255, 0.25) !important;
+      }
+      .chat-inputs textarea::placeholder {
+        color: var(--kiro-text-muted) !important;
+      }
+
+      .chat-input-send-button {
+        width: 34px !important;
+        height: 34px !important;
+        flex-shrink: 0;
+        background-color: var(--kiro-purple) !important;
+        color: #FFFFFF !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: background-color 0.15s ease, transform 0.1s ease !important;
+      }
+      .chat-input-send-button:hover {
+        background-color: var(--kiro-purple-hover) !important;
+        color: #FFFFFF !important;
+        transform: scale(1.06);
+      }
+      .chat-input-send-button:active {
+        transform: scale(0.94);
+      }
+      .chat-input-send-button svg {
+        width: 16px !important;
+        height: 16px !important;
+      }
+
+      .kiro-trademark {
+        flex-shrink: 0;
+        text-align: center;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--kiro-text-muted);
+        background-color: var(--kiro-bg);
+        border-top: 1px solid var(--kiro-border);
+        padding: 8px 12px;
+      }
+      .kiro-trademark span {
+        color: var(--kiro-purple);
+        font-weight: 600;
+      }
+
+      /* Kiro ghost mark overlaid onto the chat header (the embed has no logo slot) */
+      .chat-heading {
+        align-items: center !important;
+        gap: 12px !important;
+      }
+      .chat-heading h1 {
+        font-size: 1.2rem !important;
+        line-height: 1.2 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+      .chat-header p {
+        display: none !important;
+      }
+      .kiro-chat-logo {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background-color: var(--kiro-purple);
+        border: 2px solid #0B0A0F;
+        padding: 8px;
+        box-sizing: border-box;
+        display: block;
       }
 
       @media (max-width: 640px) {
         .chat-window {
-          width: calc(100vw - 2rem) !important;
-          max-width: 360px !important;
-          height: 65vh !important;
-          max-height: 480px !important;
-          bottom: 5.5rem !important;
-          right: 1rem !important;
+          width: calc(100vw - 2.5rem) !important;
+          max-width: 320px !important;
+          height: 70vh !important;
+          max-height: 560px !important;
+          bottom: 5.25rem !important;
+          right: 1.25rem !important;
+          border: 3px solid var(--kiro-purple) !important;
+          border-radius: 16px !important;
+          box-shadow: 6px 6px 0px 0px #0B0A0F !important;
+        }
+        /* Everything inside feels cramped at full desktop scale on a small
+           card, so shrink the header a touch too. */
+        .kiro-chat-logo {
+          width: 34px !important;
+          height: 34px !important;
+          padding: 6px !important;
+        }
+        .chat-heading {
+          gap: 8px !important;
+        }
+        .chat-heading h1 {
+          font-size: 1rem !important;
         }
       }
 
       @media (min-width: 641px) {
+        /* .chat-window-toggle lives inside .chat-window-wrapper too, so
+           resizing the wrapper itself drags the toggle button along with
+           it. Instead take .chat-window out of the wrapper's flex flow
+           with its own position:fixed, floating card with a small margin
+           on every side (matching the mobile look) and just enough
+           bottom clearance for the launcher badge to sit close beneath it. */
         .chat-window {
-          width: 380px !important;
-          height: 520px !important;
-          bottom: 5.5rem !important;
+          position: fixed !important;
+          top: 1.5rem !important;
           right: 1.5rem !important;
+          bottom: 7.5rem !important;
+          left: auto !important;
+          width: 400px !important;
+          max-width: 400px !important;
+          /* n8n hardcodes height:600px (not "auto"), so top+bottom alone
+             won't size the box — it has to be computed explicitly. */
+          height: calc(100vh - 1.5rem - 7.5rem) !important;
+          max-height: calc(100vh - 1.5rem - 7.5rem) !important;
+          border: 3px solid var(--kiro-purple) !important;
+          border-radius: 20px !important;
+          box-shadow: 8px 8px 0px 0px #0B0A0F !important;
+          z-index: 9999 !important;
         }
       }
 
@@ -105,10 +246,10 @@
         position: fixed;
         bottom: 20px;
         right: 20px;
-        width: 60px;
-        height: 60px;
+        width: 68px;
+        height: 68px;
         border-radius: 9999px;
-        background-color: #8B5CF6;
+        background-color: var(--kiro-purple, #9046FF);
         border: 3px solid #0B0A0F;
         box-shadow: 4px 4px 0px 0px #0B0A0F;
         display: flex;
@@ -116,19 +257,36 @@
         justify-content: center;
         pointer-events: none; /* Let user clicks pass through to n8n's transparent button */
         z-index: 2147483646;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        transition: box-shadow 0.15s ease;
+        animation: kiro-float 2.6s ease-in-out infinite;
+      }
+
+      /* Gentle bob, like a buoy on water, to draw the eye to the launcher.
+         Paused once the chat is open — it's a close button then, not a toy. */
+      @keyframes kiro-float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      #ghost-visual-badge.is-open {
+        animation: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #ghost-visual-badge {
+          animation: none;
+        }
       }
 
       #ghost-visual-badge img {
-        width: 34px;
-        height: 34px;
+        width: 40px;
+        height: 40px;
         object-fit: contain;
         display: block;
       }
 
       #ghost-visual-badge .badge-close {
         display: none;
-        font-size: 24px;
+        font-size: 28px;
         font-weight: 900;
         color: #FFFFFF;
         line-height: 1;
@@ -154,6 +312,7 @@
           height: 28px;
         }
       }
+
     </style>
   </head>
   <body>
@@ -175,7 +334,7 @@
         showWelcomeScreen: false,
         theme: {
           button: {
-            backgroundColor: '#8B5CF6',
+            backgroundColor: '#9046FF',
             color: '#FFFFFF',
           },
         },
@@ -186,17 +345,40 @@
         i18n: {
           en: {
             title: 'AWS Cloud Trek Assistant',
-            subtitle: 'Scope Club & AWS Student Builder Group',
+            subtitle: '',
             inputPlaceholder: 'Ask a question...',
           },
         },
       });
 
+      // The n8n embed has no logo slot, so overlay our own Kiro ghost mark
+      // onto the header, and pin the "Built by AWS SBG" trademark to the
+      // bottom of the sidebar.
+      const brandingObserver = new MutationObserver(() => {
+        const chatLayoutEl = document.querySelector('.chat-window .chat-layout');
+        if (chatLayoutEl && !chatLayoutEl.querySelector('.kiro-trademark')) {
+          const trademark = document.createElement('div');
+          trademark.className = 'kiro-trademark';
+          trademark.innerHTML = 'Built by <span>AWS SBG</span>';
+          chatLayoutEl.appendChild(trademark);
+        }
+
+        const chatHeading = document.querySelector('.chat-heading');
+        if (chatHeading && !chatHeading.querySelector('.kiro-chat-logo')) {
+          const logo = document.createElement('img');
+          logo.src = '/ghost.svg';
+          logo.alt = 'Kiro';
+          logo.className = 'kiro-chat-logo';
+          chatHeading.insertBefore(logo, chatHeading.firstChild);
+        }
+      });
+      brandingObserver.observe(document.body, { childList: true, subtree: true });
+
       const badge = document.getElementById('ghost-visual-badge');
 
       // Accurate check: Only show '✕' if the chat window is genuinely open and visible
       function syncBadgeState() {
-        const chatWin = document.querySelector('.chat-window, [class*="chat-window"]');
+        const chatWin = document.querySelector('.chat-window');
         if (!chatWin) {
           badge.classList.remove('is-open');
           return;
