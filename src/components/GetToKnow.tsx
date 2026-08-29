@@ -195,7 +195,7 @@ export default function GetToKnow() {
 
         {/* Laptop + Certifications callout */}
         <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-4">
-          <div className="border-[4px] border-cream bg-e-purple p-5 text-ink shadow-[6px_6px_0_#F5F1E8]">
+          <div className="border-[4px] border-cream bg-e-purple p-5 text-ink shadow-[6px_6px_0_#F5F1E8] -rotate-1 transition-transform duration-200 hover:rotate-0 hover:-translate-y-1">
             <h4 className="font-display text-xl uppercase tracking-tight md:text-2xl">
               Laptop Required
             </h4>
@@ -203,7 +203,7 @@ export default function GetToKnow() {
               A laptop is required for hands-on development, testing, Git/GitHub work, and deployment.
             </p>
           </div>
-          <div className="border-[4px] border-cream bg-cream p-5 text-ink shadow-[6px_6px_0_#F5F1E8]">
+          <div className="border-[4px] border-cream bg-cream p-5 text-ink shadow-[6px_6px_0_#F5F1E8] rotate-1 transition-transform duration-200 hover:rotate-0 hover:-translate-y-1">
             <h4 className="font-display text-xl uppercase tracking-tight md:text-2xl">
               Certifications
             </h4>

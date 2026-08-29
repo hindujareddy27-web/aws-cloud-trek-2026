@@ -1,8 +1,7 @@
 import Ghost from './Ghost';
 import { BurstSticker, StarSticker, CircleSticker, ArrowSticker } from './Stickers';
-import { EVENT, BRANDING, CONTACT } from '@/config';
+import { EVENT, BRANDING } from '@/config';
 import { useInView } from '@/hooks/useInView';
-import { Instagram, Linkedin, Mail, Phone } from 'lucide-react';
 
 export default function FinalCta() {
   const { ref: ghostRef, inView } = useInView<HTMLDivElement>();
@@ -55,7 +54,7 @@ export default function FinalCta() {
         {/* Footer */}
         <footer className="mx-auto mt-10 max-w-6xl md:mt-14">
           {/* Dual Organizations Logo Row — Clean horizontal layout: Left: SCOPE, Right: AWS SBG */}
-          <div className="flex flex-col items-center justify-between gap-6 border-t-[3px] border-cream/30 py-8 sm:flex-row sm:items-center md:py-10">
+          <div className="flex flex-col items-center justify-between gap-6 border-y-[3px] border-cream/30 py-8 sm:flex-row sm:items-center md:py-10">
             {/* LEFT SIDE: SCOPE — MLRIT logo */}
             <div className="flex w-full items-center justify-center sm:w-auto sm:justify-start">
               <img
@@ -72,51 +71,6 @@ export default function FinalCta() {
                 alt="AWS Student Builder Group at MLRIT logo"
                 className="h-10 w-auto max-w-[200px] object-contain sm:h-12 sm:max-w-[240px] md:h-14 md:max-w-[280px] lg:h-16 lg:max-w-[320px]"
               />
-            </div>
-          </div>
-
-          {/* Event info + Contact + Social links */}
-          <div className="flex flex-col gap-6 border-t-[3px] border-cream/30 pt-6 md:flex-row md:items-start md:justify-between">
-            <div className="flex flex-col items-center gap-1 md:items-start">
-              <p className="font-display text-lg uppercase tracking-tight text-cream md:text-2xl">
-                {EVENT.name}
-              </p>
-              <p className="font-sans text-xs font-medium text-cream/60 md:text-sm">
-                {EVENT.tagline} · {EVENT.date}
-              </p>
-              <div className="mt-3 flex flex-col items-center gap-2 md:items-start">
-                <a href={`tel:${CONTACT.phone1.replace(/\s/g, '')}`} className="inline-flex items-center gap-2 font-sans text-xs font-bold text-cream/80 hover:text-cream md:text-sm">
-                  <Phone size={14} strokeWidth={2.5} />
-                  {CONTACT.phone1}
-                </a>
-                <a href={`tel:${CONTACT.phone2.replace(/\s/g, '')}`} className="inline-flex items-center gap-2 font-sans text-xs font-bold text-cream/80 hover:text-cream md:text-sm">
-                  <Phone size={14} strokeWidth={2.5} />
-                  {CONTACT.phone2}
-                </a>
-                <a href={`mailto:${CONTACT.email}`} className="inline-flex items-center gap-2 font-sans text-xs font-bold text-cream/80 hover:text-cream md:text-sm">
-                  <Mail size={14} strokeWidth={2.5} />
-                  {CONTACT.email}
-                </a>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center gap-2 md:items-end">
-              <a href={CONTACT.awsSbgInstagram} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-sans text-xs font-bold text-cream/80 hover:text-cream md:text-sm">
-                <Instagram size={14} strokeWidth={2.5} />
-                @awssbg_mlrit
-              </a>
-              <a href={CONTACT.scopeInstagram} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-sans text-xs font-bold text-cream/80 hover:text-cream md:text-sm">
-                <Instagram size={14} strokeWidth={2.5} />
-                @mlrit_scope
-              </a>
-              <a href={CONTACT.awsSbgLinkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-sans text-xs font-bold text-cream/80 hover:text-cream md:text-sm">
-                <Linkedin size={14} strokeWidth={2.5} />
-                AWS SBG MLRIT
-              </a>
-              <a href={CONTACT.scopeLinkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-sans text-xs font-bold text-cream/80 hover:text-cream md:text-sm">
-                <Linkedin size={14} strokeWidth={2.5} />
-                SCOPE Club MLRIT
-              </a>
             </div>
           </div>
         </footer>
