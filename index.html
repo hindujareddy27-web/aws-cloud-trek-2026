@@ -14,9 +14,9 @@
       property="og:description"
       content="Build with Kiro. Deploy on AWS. A hands-on student journey from idea to cloud."
     />
-    <meta property="og:image" content="https://bolt.new/static/og_default.png" />
+    <meta property="og:image" content="https://aws-cloud-trek.pages.dev/aws-sbg-logo.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://bolt.new/static/og_default.png" />
+    <meta name="twitter:image" content="https://aws-cloud-trek.pages.dev/aws-sbg-logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -313,6 +313,58 @@
         }
       }
 
+      /* 6. Attention-grabbing speech bubble next to the closed launcher */
+      #ghost-hint {
+        position: fixed;
+        bottom: 38px;
+        right: 100px;
+        max-width: 190px;
+        padding: 10px 14px;
+        background-color: var(--kiro-surface, #19161D);
+        color: var(--kiro-text, #FAFAFA);
+        border: 2px solid var(--kiro-purple, #9046FF);
+        border-radius: 12px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-size: 13px;
+        line-height: 1.35;
+        box-shadow: 3px 3px 0px 0px #0B0A0F;
+        pointer-events: none;
+        z-index: 2147483645;
+        opacity: 0;
+        transform: translateY(6px) scale(0.96);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      /* Fading out is deliberately slower than fading in — it should
+         drift away, not snap off. JS toggles this class for the exit. */
+      #ghost-hint.kiro-hint--hiding {
+        transition: opacity 1.6s ease, transform 1.6s ease;
+      }
+      #ghost-hint::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: -9px;
+        width: 14px;
+        height: 14px;
+        margin-top: -7px;
+        background-color: var(--kiro-surface, #19161D);
+        border-right: 2px solid var(--kiro-purple, #9046FF);
+        border-bottom: 2px solid var(--kiro-purple, #9046FF);
+        transform: rotate(-45deg);
+      }
+      #ghost-hint.kiro-hint--visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      @media (max-width: 640px) {
+        #ghost-hint {
+          bottom: 29px;
+          right: 78px;
+          max-width: 160px;
+          font-size: 12px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -324,6 +376,7 @@
       <img src="/ghost.svg" alt="Chat Assistant" />
       <span class="badge-close">✕</span>
     </div>
+    <div id="ghost-hint" aria-hidden="true"></div>
 
     <!-- n8n Chat Initialization Script -->
     <script type="module">
@@ -391,14 +444,74 @@
                           getComputedStyle(chatWin).visibility !== 'hidden' &&
                           getComputedStyle(chatWin).opacity !== '0';
 
+        const wasOpen = badge.classList.contains('is-open');
         if (isVisible) {
           badge.classList.add('is-open');
+          if (!wasOpen) {
+            // Chat just opened — drop the hint bubble immediately instead
+            // of letting it sit there until its own timer fades it out.
+            const hintEl = document.getElementById('ghost-hint');
+            hintEl.classList.remove('kiro-hint--visible');
+            hintEl.classList.add('kiro-hint--hiding');
+          }
         } else {
           badge.classList.remove('is-open');
         }
       }
 
       setInterval(syncBadgeState, 200);
+
+      // Attention-grabbing speech bubble cycling next to the closed launcher.
+      const HINT_MESSAGES = [
+        'Click me for help! 👋',
+        'Need help with something? Ask me!',
+        'Got questions about the Trek? Tap me!',
+        "Stuck on anything? I can help!",
+        'Curious about Cloud Trek? Ask me!',
+      ];
+      const hint = document.getElementById('ghost-hint');
+      let lastHintIndex = -1;
+      let hintTimer = null;
+      const HINT_VISIBLE_MS = 4200; // at least 4s on screen
+      const HINT_FADE_OUT_MS = 1600; // matches the .kiro-hint--hiding transition
+      const HINT_GAP_MS = 700; // next one appears 0.5-1s after it's fully gone
+
+      function scheduleNextHint(delayMs) {
+        clearTimeout(hintTimer);
+        hintTimer = setTimeout(showHint, delayMs);
+      }
+
+      function showHint() {
+        // Skip entirely while the chat is open — it's a close button then.
+        if (badge.classList.contains('is-open')) {
+          scheduleNextHint(3000);
+          return;
+        }
+
+        let index = Math.floor(Math.random() * HINT_MESSAGES.length);
+        if (index === lastHintIndex) {
+          index = (index + 1) % HINT_MESSAGES.length;
+        }
+        lastHintIndex = index;
+
+        hint.textContent = HINT_MESSAGES[index];
+        hint.classList.remove('kiro-hint--hiding');
+        // Force reflow so re-adding the visible class always retransitions,
+        // even if the previous hint's fade-out was interrupted.
+        void hint.offsetWidth;
+        hint.classList.add('kiro-hint--visible');
+
+        setTimeout(hideHint, HINT_VISIBLE_MS);
+      }
+
+      function hideHint() {
+        hint.classList.add('kiro-hint--hiding');
+        hint.classList.remove('kiro-hint--visible');
+        scheduleNextHint(HINT_FADE_OUT_MS + HINT_GAP_MS);
+      }
+
+      // First hint appears a few seconds after load, then repeats.
+      scheduleNextHint(4000);
     </script>
   </body>
 </html>
