@@ -158,7 +158,7 @@ export default function GetToKnow() {
             {WORKSHOP_TOPICS.map((t, i) => (
               <div
                 key={t.title}
-                className={`border-[3px] border-cream bg-cream p-4 text-ink shadow-[4px_4px_0_#F5F1E8] transition-transform duration-200 hover:-translate-y-1 ${i % 2 === 0 ? '-rotate-1' : 'rotate-1'}`}
+                className={`border-[3px] border-cream p-4 text-ink shadow-[4px_4px_0_#F5F1E8] transition-transform duration-200 hover:-translate-y-1 sm:bg-cream ${i % 2 === 0 ? 'bg-cream -rotate-1' : 'bg-lavender rotate-1'}`}
               >
                 <span className="font-sans text-[10px] font-bold uppercase tracking-[0.15em] text-e-purple">
                   {String(i + 1).padStart(2, '0')}
@@ -179,14 +179,29 @@ export default function GetToKnow() {
           <p className="text-center font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-cream/60 md:text-xs">
             The Journey
           </p>
-          <div className="mt-4 flex flex-col items-center gap-2 md:flex-row md:flex-wrap md:justify-center md:gap-3">
+          {/* mobile: auto-scrolling horizontal strip */}
+          <div className="relative mt-4 overflow-hidden md:hidden">
+            <div className="flex w-max animate-journeyScroll items-center gap-2">
+              {[...JOURNEY_STEPS, ...JOURNEY_STEPS].map((step, i) => (
+                <div key={`${step}-${i}`} className="flex flex-shrink-0 items-center gap-2">
+                  <span className="border-[2px] border-cream bg-e-purple px-2 py-1 font-sans text-[9px] font-bold uppercase tracking-wide text-ink">
+                    {step}
+                  </span>
+                  <span className="text-e-purple">→</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* desktop: static wrapped layout */}
+          <div className="mt-4 hidden flex-wrap items-center justify-center gap-3 md:flex">
             {JOURNEY_STEPS.map((step, i) => (
-              <div key={step} className="flex flex-col items-center gap-2 md:flex-row md:gap-3">
-                <span className="border-[2px] border-cream bg-e-purple px-2 py-1 font-sans text-[9px] font-bold uppercase tracking-wide text-ink md:px-3 md:text-xs">
+              <div key={step} className="flex items-center gap-3">
+                <span className="border-[2px] border-cream bg-e-purple px-3 py-1 font-sans text-xs font-bold uppercase tracking-wide text-ink">
                   {step}
                 </span>
                 {i < JOURNEY_STEPS.length - 1 && (
-                  <span className="rotate-90 text-e-purple md:rotate-0 md:text-lg">→</span>
+                  <span className="text-lg text-e-purple">→</span>
                 )}
               </div>
             ))}
@@ -203,7 +218,7 @@ export default function GetToKnow() {
               A laptop is required for hands-on development, testing, Git/GitHub work, and deployment.
             </p>
           </div>
-          <div className="border-[4px] border-cream bg-cream p-5 text-ink shadow-[6px_6px_0_#F5F1E8] rotate-1 transition-transform duration-200 hover:rotate-0 hover:-translate-y-1">
+          <div className="border-[4px] border-e-purple bg-cream p-5 text-ink shadow-[6px_6px_0_#8B5CF6] rotate-1 transition-transform duration-200 hover:rotate-0 hover:-translate-y-1">
             <h4 className="font-display text-xl uppercase tracking-tight md:text-2xl">
               Certifications
             </h4>

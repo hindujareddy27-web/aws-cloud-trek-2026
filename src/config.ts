@@ -127,34 +127,9 @@ export const FAQ: FaqItem[] = [
       'The workshop involves building applications, working with code and deploying projects. You do not need to be an advanced developer — the workshop is designed to introduce these concepts step by step.',
   },
   {
-    question: 'What Is Kiro?',
-    answer:
-      'Kiro is a development environment that helps developers build applications with AI-assisted workflows. The workshop introduces prompting, project context, code generation, debugging, testing and Kiro\'s spec-driven development approach.',
-  },
-  {
-    question: 'What Will I Learn?',
-    answer:
-      'You will explore AI-assisted development, Kiro, application building, APIs, basic databases, Git & GitHub, cloud fundamentals, security basics and application deployment.',
-  },
-  {
     question: 'Will the Workshop Be Hands-On?',
     answer:
       'Yes. The workshop is designed around hands-on learning, taking participants through the journey from an application idea to a working and deployed application.',
-  },
-  {
-    question: 'Will We Deploy an Application on AWS?',
-    answer:
-      'Yes. Application deployment on AWS is a core part of the workshop, taking you from a locally running application toward a live cloud application.',
-  },
-  {
-    question: 'Do I Need a Laptop?',
-    answer:
-      'Yes. A laptop is required. The workshop includes hands-on development, testing, Git/GitHub work and deployment.',
-  },
-  {
-    question: 'Will I Receive a Certificate?',
-    answer:
-      'Yes. Participants will receive certifications along with credentials related to Kiro and AWS deployment.',
   },
   {
     question: 'What Comes After the Workshop?',

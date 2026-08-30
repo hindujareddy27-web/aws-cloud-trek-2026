@@ -78,6 +78,10 @@ export default {
           '0%': { opacity: '0', transform: 'translateY(30px) rotate(-5deg)' },
           '100%': { opacity: '1', transform: 'translateY(0) rotate(0deg)' },
         },
+        journeyScroll: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         floatY: 'floatY 5s ease-in-out infinite',
@@ -93,6 +97,7 @@ export default {
         ghostTilt: 'ghostTilt 4s ease-in-out infinite',
         ghostBounce: 'ghostBounce 3s ease-in-out infinite',
         ghostPeek: 'ghostPeek 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both',
+        journeyScroll: 'journeyScroll 22s linear infinite',
       },
     },
   },
