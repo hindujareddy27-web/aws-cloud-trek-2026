@@ -26,8 +26,7 @@ const DETAILS = [
 ];
 
 const INFO_BLOCKS = [
-  { label: 'SPEAKER 1', value: 'Coming Soon' },
-  { label: 'SPEAKER 2', value: 'Coming Soon' },
+  { label: 'MENTOR', value: 'Coming Soon' },
 ];
 
 const WORKSHOP_TOPICS = [
@@ -132,12 +131,31 @@ export default function GetToKnow() {
           </h2>
         </div>
 
-        {/* Info blocks — Speakers */}
-        <div className="mx-auto mt-8 grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2 md:mt-10 md:gap-4">
+        {/* Prize Pool poster statement */}
+        <div className="relative mt-10 overflow-hidden border-[4px] border-cream bg-e-purple p-6 shadow-[8px_8px_0_#F5F1E8] md:mt-12 md:p-10">
+          <BurstSticker className="absolute -left-3 -top-3 h-12 w-12 animate-spinSlow opacity-90 md:-left-4 md:-top-4 md:h-20 md:w-20" />
+          <StarSticker className="absolute right-6 top-6 h-8 w-8 animate-wobble md:h-14 md:w-14" />
+          <CircleSticker className="absolute bottom-6 left-8 h-8 w-8 animate-floatY opacity-80 md:h-14 md:w-14" />
+
+          <div className="relative text-center">
+            <span className="inline-block border-[3px] border-ink bg-cream px-4 py-1 font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-ink md:text-xs">
+              Prize Pool
+            </span>
+            <h2 className="mt-4 font-display text-[clamp(2.5rem,10vw,7rem)] uppercase leading-[0.82] tracking-tighter text-ink">
+              ₹50,000
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl font-sans text-sm font-medium text-ink/80 md:text-base">
+              Including AWS Cloud Practitioner / AI Practitioner certification vouchers and exclusive swags for winners.
+            </p>
+          </div>
+        </div>
+
+        {/* Info blocks — Mentor */}
+        <div className="mt-8 flex justify-center md:mt-10">
           {INFO_BLOCKS.map((b, i) => (
             <div
               key={b.label}
-              className={`border-[4px] border-cream bg-cream p-5 text-ink shadow-[6px_6px_0_#F5F1E8] transition-transform duration-200 hover:-translate-y-1 ${i % 2 === 0 ? '-rotate-1' : 'rotate-1'} md:p-6`}
+              className={`w-full max-w-sm border-[4px] border-cream bg-cream p-5 text-ink shadow-[6px_6px_0_#F5F1E8] transition-transform duration-200 hover:-translate-y-1 ${i % 2 === 0 ? '-rotate-1' : 'rotate-1'} md:p-6`}
             >
               <span className="font-sans text-xs font-bold uppercase tracking-[0.2em] text-e-purple md:text-sm">
                 {b.label}
@@ -223,7 +241,7 @@ export default function GetToKnow() {
               Certifications
             </h4>
             <p className="mt-2 font-sans text-sm font-medium text-ink/80 md:text-base">
-              Participants will receive certificates along with credentials for Kiro and AWS deployment.
+              Participants will receive certificates. Details on credentials will be communicated before the event.
             </p>
           </div>
         </div>

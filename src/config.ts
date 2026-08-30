@@ -8,7 +8,7 @@ export const EVENT = {
   tagline: 'Build with Kiro & Deploy on AWS',
   date: '11–12 September',
   venue: 'TP Block, MLRIT',
-  audience: '2nd & 3rd-year students',
+  audience: '1st to 4th-year students',
   level: 'Beginner-friendly',
   focus: 'AWS × Kiro',
   laptop: 'REQUIRED',
@@ -33,8 +33,10 @@ export const CONTACT = {
   awsSbgLinkedin: 'https://www.linkedin.com/company/awscc-mlrit/posts/?feedView=all',
   scopeLinkedin: 'https://www.linkedin.com/company/mlrit-scope/posts/?feedView=all',
   email: 'scopeclub@mlrinstitutions.ac.in',
+  name1: 'Ravinder',
   phone1: '+91 70327 93341',
-  phone2: '+91 83285 56430',
+  name2: 'Pranaya Sree',
+  phone2: '+91 85208 78312',
 };
 
 export type GalleryItem = {
@@ -52,7 +54,7 @@ export const GALLERY: GalleryItem[] = [
   {
     id: 'gallery01',
     number: '01',
-    label: 'HACK & COLLAB',
+    label: 'COLLAB',
     caption: 'Student builders collaborating and building cloud setups',
     src: '/gallery/last-trek-06-mentor.jpg',
     alt: 'Four students collaborating with smiles over a laptop',
@@ -61,10 +63,10 @@ export const GALLERY: GalleryItem[] = [
   {
     id: 'gallery02',
     number: '02',
-    label: 'THE SPEAKERS',
+    label: 'THE MENTOR',
     caption: 'Keynote introduction & cloud architecture breakdown',
     src: '/gallery/last-trek-01-speaker.jpg',
-    alt: 'Speaker presenting AWS Cloud Trek session with microphone',
+    alt: 'Mentor presenting AWS Cloud Trek session with microphone',
     rotate: 'rotate-2',
   },
   {
@@ -114,7 +116,7 @@ export const FAQ: FaqItem[] = [
   {
     question: 'Who Can Attend?',
     answer:
-      'AWS Cloud Trek is designed primarily for 2nd and 3rd-year students and is beginner-friendly.',
+      'AWS Cloud Trek is open to all students from 1st to 4th year and is beginner-friendly.',
   },
   {
     question: 'What Skills Do I Need?',

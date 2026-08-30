@@ -45,14 +45,14 @@ export default function Contact() {
                     className="inline-flex items-center gap-2 font-sans text-sm font-bold text-ink hover:underline md:text-base"
                   >
                     <Phone size={16} strokeWidth={2.5} />
-                    {CONTACT.phone1}
+                    {CONTACT.name1} — {CONTACT.phone1}
                   </a>
                   <a
                     href={`tel:${CONTACT.phone2.replace(/\s/g, '')}`}
                     className="inline-flex items-center gap-2 font-sans text-sm font-bold text-ink hover:underline md:text-base"
                   >
                     <Phone size={16} strokeWidth={2.5} />
-                    {CONTACT.phone2}
+                    {CONTACT.name2} — {CONTACT.phone2}
                   </a>
                 </div>
               </div>
@@ -131,7 +131,7 @@ export default function Contact() {
                   className="inline-flex items-center gap-2 font-sans text-sm font-bold text-ink hover:text-e-purple md:text-base"
                 >
                   <Linkedin size={18} strokeWidth={2.5} />
-                  SCOPE Club MLRIT
+                  MLRIT SCOPE
                 </a>
               </div>
             </div>
