@@ -25,8 +25,21 @@ const DETAILS = [
   { label: 'FOCUS', value: EVENT.focus, accent: 'bg-lavender', text: 'text-ink' },
 ];
 
-const INFO_BLOCKS = [
-  { label: 'MENTOR', value: 'Coming Soon' },
+const MENTORS = [
+  {
+    name: 'Avinash Reddy Thipparti',
+    role: 'Founder • Aviz Academy • AWS Community Builder',
+    image: '/mentor-avinash.png',
+    alt: 'Avinash Reddy Thipparti, AWS Community Builder and Founder of Aviz Academy',
+    rotate: '-rotate-1',
+  },
+  {
+    name: 'Praveen Kumar Grandhi',
+    role: 'Team Lead, DevOps Admin • Accenture',
+    image: '/mentor-praveen.png',
+    alt: 'Praveen Kumar Grandhi, Team Lead and DevOps Admin at Accenture',
+    rotate: 'rotate-1',
+  },
 ];
 
 const WORKSHOP_TOPICS = [
@@ -46,6 +59,7 @@ const JOURNEY_STEPS = [
 
 export default function GetToKnow() {
   const { ref: ghostRef, inView } = useInView<HTMLDivElement>();
+  const { ref: mentorRef, inView: mentorInView } = useInView<HTMLDivElement>();
 
   return (
     <section id="trek" className="relative bg-ink px-3 py-14 md:px-6 md:py-20">
@@ -150,21 +164,51 @@ export default function GetToKnow() {
           </div>
         </div>
 
-        {/* Info blocks — Mentor */}
-        <div className="mt-8 flex justify-center md:mt-10">
-          {INFO_BLOCKS.map((b, i) => (
-            <div
-              key={b.label}
-              className={`w-full max-w-sm border-[4px] border-cream bg-cream p-5 text-ink shadow-[6px_6px_0_#F5F1E8] transition-transform duration-200 hover:-translate-y-1 ${i % 2 === 0 ? '-rotate-1' : 'rotate-1'} md:p-6`}
-            >
-              <span className="font-sans text-xs font-bold uppercase tracking-[0.2em] text-e-purple md:text-sm">
-                {b.label}
-              </span>
-              <p className="mt-2 font-display text-2xl uppercase tracking-tight text-ink md:text-3xl">
-                {b.value}
-              </p>
-            </div>
-          ))}
+        {/* Mentors Section — Side-by-side neo-brutalist mentor cards */}
+        <div
+          ref={mentorRef}
+          className={`mt-8 transition-all duration-700 ease-out md:mt-10 ${
+            mentorInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          }`}
+        >
+          <div className="mx-auto grid max-w-3xl grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6">
+            {MENTORS.map((m) => (
+              <div
+                key={m.name}
+                className={`group relative border-[4px] border-cream bg-cream p-4 text-ink shadow-[6px_6px_0_#F5F1E8] transition-all duration-200 hover:-translate-y-1 hover:rotate-0 hover:shadow-[8px_8px_0_#8B5CF6] sm:p-5 ${m.rotate}`}
+              >
+                {/* Small label above the image */}
+                <div className="mb-3 flex items-center justify-between">
+                  <span className="inline-block border-[2px] border-ink bg-e-purple px-2.5 py-0.5 font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-ink shadow-[2px_2px_0_#0B0A0F] md:text-xs">
+                    MENTOR
+                  </span>
+                  <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-ink/60">
+                    AWS Cloud Trek
+                  </span>
+                </div>
+
+                {/* Photo frame with consistent dimensions */}
+                <div className="relative aspect-[4/3] w-full overflow-hidden border-[3px] border-ink bg-ink">
+                  <img
+                    src={m.image}
+                    alt={m.alt}
+                    referrerPolicy="no-referrer"
+                    className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+
+                {/* Mentor name & details below the image */}
+                <div className="pt-3.5">
+                  <h3 className="font-display text-lg uppercase leading-tight tracking-tight text-ink sm:text-xl md:text-2xl">
+                    {m.name}
+                  </h3>
+                  <p className="mt-1 font-sans text-xs font-medium leading-snug text-ink/75 sm:text-sm">
+                    {m.role}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Workshop content overview */}
